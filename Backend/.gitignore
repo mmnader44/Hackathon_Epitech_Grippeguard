@@ -1,0 +1,7 @@
+# Ignorer les caches Python
+__pycache__/
+*.py[cod]
+
+# Ignorer les dossiers de données brutes et nettoyées
+backend/data/raw/
+backend/data/clean/

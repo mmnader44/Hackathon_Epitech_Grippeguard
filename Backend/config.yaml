@@ -1,0 +1,56 @@
+sources:
+  urgences:
+    url: "https://odisse.santepubliquefrance.fr/api/explore/v2.1/catalog/datasets/grippe-passages-aux-urgences-et-actes-sos-medecins-departement/exports/csv?lang=fr&timezone=Europe%2FBerlin&use_labels=true&delimiter=%2C"
+    type: csv
+    
+    # url: "https://odisse.santepubliquefrance.fr/api/explore/v2.1/catalog/datasets/grippe-passages-aux-urgences-et-actes-sos-medecins-departement/exports/parquet?lang=fr&timezone=Europe%2FBerlin"
+    # type: Geoparquet
+    
+
+  couverture_vaccinale:
+    url: "https://odisse.santepubliquefrance.fr/api/explore/v2.1/catalog/datasets/couvertures-vaccinales-des-adolescent-et-adultes-departement/exports/csv?lang=fr&timezone=Europe%2FBerlin&use_labels=true&delimiter=%2C"
+    type: csv
+  
+  pharmacies:
+    url: "https://www.data.gouv.fr/api/1/datasets/r/479afe3e-a2aa-4519-b509-ba9c106a5576"
+    type: csv
+
+  geo_departements:
+    url: "https://france-geojson.gregoiredavid.fr/repo/departements.geojson"
+    type: geojson
+
+  # Multi-campagnes (2021-2025)
+  doses_campaigns:
+    "2021-2022": "https://www.data.gouv.fr/api/1/datasets/r/d1a7a9c8-da2a-4840-be4e-720b4703462c"
+    "2022-2023": "https://www.data.gouv.fr/api/1/datasets/r/1339c744-6b09-4a21-a5a0-6f56200f7208"
+    "2023-2024": "https://www.data.gouv.fr/api/1/datasets/r/dccbba26-bf9a-4d30-8249-5a539354e69b"
+    "2024-2025": "https://www.data.gouv.fr/api/1/datasets/r/a6f6c78f-96eb-41e5-8c8e-54c2bcbbe3f2"
+
+  couverture_campaigns:
+    "2021-2022": "https://www.data.gouv.fr/api/1/datasets/r/70f1cfba-569c-46fd-aa0d-2bc890a42eb5"
+    "2022-2023": "https://www.data.gouv.fr/api/1/datasets/r/c36e85ef-077e-465e-b3e4-e218d972f45e"
+    "2023-2024": "https://www.data.gouv.fr/api/1/datasets/r/1b5339fe-47b9-4d29-9be6-792ac20e392b"
+    "2024-2025": "https://www.data.gouv.fr/api/1/datasets/r/848e3e48-4971-4dc5-97c7-d856cdfde2f6"
+
+  campagne_campaigns:
+    "2021-2022": "https://www.data.gouv.fr/api/1/datasets/r/b4867c67-70c9-459f-a88d-859996e8098b"
+    "2022-2023": "https://www.data.gouv.fr/api/1/datasets/r/992e690a-0c9c-4457-a556-3d70b4af29e8"
+    "2023-2024": "https://www.data.gouv.fr/api/1/datasets/r/40314f2c-12ea-4f4c-a3a2-855bab16e6dd"
+    "2024-2025": "https://www.data.gouv.fr/api/1/datasets/r/c26a4606-b6a5-49a9-ad18-89cc0e1fc8c2"
+
+output:
+  clean_dir: "data/clean"
+  parquet_files:
+    urgences: "data/clean/urgences.parquet"
+    couverture: "data/clean/couverture.parquet"
+    pharmacies: "data/clean/pharmacies.parquet"
+    multi_doses: "data/clean/multi_doses.parquet"
+    multi_couverture: "data/clean/multi_couverture.parquet"
+    multi_campagne: "data/clean/multi_campagne.parquet"
+
+postgres:
+  host: postgres
+  port: 5432
+  user: data
+  password: data
+  database: health

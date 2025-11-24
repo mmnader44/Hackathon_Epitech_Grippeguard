@@ -1,0 +1,9 @@
+pandas>=1.5
+PyYAML>=6.0
+geopandas>=0.13
+fiona>=1.9
+shapely>=2.0
+rtree>=0.10
+pyarrow>=9.0
+
+
