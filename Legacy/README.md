@@ -69,7 +69,35 @@ Les données utilisées dans ce projet proviennent de sources publiques :
 * **Santé Publique France** : [Couverture vaccinale, passages aux urgences, hospitalisations](https://www.santepubliquefrance.fr).
 * **IQVIA** : [Données de distribution de vaccins](https://www.data.gouv.fr/organizations/iqvia-france/datasets).
 * **GeoJSON** : [Données géographiques des départements français](https://france-geojson.gregoiredavid.fr/repo/departements.geojson).
+# Legacy — prototype
 
-## **Licence**
+Ce dossier contient la version prototype / preuve de concept du projet. Il s'agit d'une application Dash (Python) et de notebooks d'exploration utilisés lors des premières phases du hackathon.
 
-Ce projet est sous licence MIT. Voir le fichier [LICENSE](LICENSE) pour plus d'informations.
+Fichiers importants :
+
+- `app.py` : prototype Dash pour visualisation rapide (interface de démonstration).
+- `Documentation_GrippeGuard.pdf`, `Hackathon.pdf` : documents et livrables du hackathon.
+- `GoogleCollab_Explo/` : notebooks d'exploration et analyse.
+
+## Lancer le prototype
+
+1. Créez un environnement Python et installez les dépendances :
+
+```powershell
+cd Legacy
+python -m venv .venv
+.\.venv\Scripts\Activate.ps1
+python -m pip install -r requirements.txt
+```
+
+2. Lancer l'application Dash :
+
+```powershell
+python app.py
+```
+
+L'interface prototype est généralement disponible sur `http://localhost:8050`.
+
+## Remarque
+
+Le dossier `Legacy` sert uniquement de référence : la version de production du projet se situe désormais dans `Backend/` (ETL + API) et `Frontend/` (React). Conserver ces fichiers permet de consulter les choix initiaux et les notebooks d'exploration.

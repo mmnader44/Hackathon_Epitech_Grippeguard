@@ -62,117 +62,65 @@ src/
 │   └── Home.jsx       # Page d'accueil
 ├── App.jsx            # Composant racine
 └── main.jsx           # Point d'entrée
+# GrippeGuard — Frontend
+
+Interface React (Vite) du projet. Ce README corrige et précise les informations d'exécution et de configuration.
+
+## Démarrage rapide (PowerShell)
+
+1. Installer les dépendances et démarrer le serveur de développement :
+
+```powershell
+cd Frontend
+npm install
+npm run dev
 ```
 
-## 🎨 Technologies utilisées
+Vite démarre typiquement sur `http://localhost:5173` (ou `http://localhost:3000` selon la configuration).
 
-- **React 19** - Bibliothèque UI moderne
-- **Vite** - Build tool ultra-rapide
-- **Tailwind CSS 4** - Framework CSS utility-first
-- **Shadcn/ui** - Composants UI accessibles et personnalisables
-- **Radix UI** - Composants primitifs accessibles
-- **Lucide React** - Icônes modernes
-- **GraphQL Request** - Client GraphQL léger
-- **GraphQL** - Langage de requête pour l'API
+2. Configurer l'URL du backend GraphQL :
 
-## ✨ Fonctionnalités
+Créez/éditez le fichier `Frontend/.env` et définissez `VITE_GRAPHQL_URL` vers l'API Flask. Exemple :
 
-- ✅ Header avec navigation responsive et menu mobile
-- ✅ Hero section avec statistiques et fonctionnalités
-- ✅ Footer professionnel avec badges
-- ✅ Design moderne avec Tailwind CSS
-- ✅ Composants Shadcn/ui (Button, Card, Badge)
-- ✅ Animations et transitions fluides
-- ✅ **Connexion au backend GraphQL**
-- ✅ Hooks personnalisés pour les requêtes GraphQL
-- ✅ Accessibilité (ARIA labels, navigation clavier)
-- ✅ Responsive design (mobile, tablette, desktop)
-
-## 🔌 Connexion au Backend
-
-Le frontend est maintenant connecté au backend GraphQL. Voici comment l'utiliser :
-
-### Configuration
-
-L'URL du backend est configurée dans `.env` :
 ```env
-VITE_GRAPHQL_URL=http://localhost:5000/graphql
+VITE_GRAPHQL_URL=http://localhost:5001/graphql
 ```
 
-### Utilisation du hook useGraphQL
+Le backend par défaut écoute sur le port `5001` (voir `Backend/src/app.py`).
+
+## Commandes utiles
+
+- `npm run dev` — serveur de développement
+- `npm run build` — build de production
+- `npm run preview` — prévisualisation du build
+
+## Structure principale (`src/`)
+
+- `components/` — composants réutilisables (dont `ui/` pour composants partagés)
+- `hooks/` — hooks React personnalisés (`useGraphQL.js` pour interroger l'API)
+- `lib/` — utilitaires (`graphql.js` contient les requêtes utilisées)
+- `pages/` — pages principales (`Dashboard.jsx`, `Prediction.jsx`)
+
+## Connexion au backend
+
+- L'URL GraphQL est définie via `VITE_GRAPHQL_URL` dans `Frontend/.env`.
+- Exemple d'utilisation du hook `useGraphQL` (simplifié) :
 
 ```jsx
-import { useGraphQL } from '../hooks/useGraphQL'
-import { GET_STATS_URGENCES } from '../lib/graphql'
+import { useGraphQL } from './hooks/useGraphQL'
+import { GET_STATS_URGENCES } from './lib/graphql'
 
 function MyComponent() {
   const { data, loading, error } = useGraphQL(GET_STATS_URGENCES)
-  
   if (loading) return <div>Chargement...</div>
   if (error) return <div>Erreur: {error.message}</div>
-  
   return <div>Stats: {data?.statsUrgences}</div>
 }
 ```
 
-### Utilisation du hook useStats
+## Dépannage rapide
 
-```jsx
-import { useStats } from '../hooks/useGraphQL'
+- Si le frontend ne récupère pas de données : assurez-vous que l'API GraphQL est démarrée (`Backend/src/app.py`) et que `VITE_GRAPHQL_URL` pointe vers `http://localhost:5001/graphql`.
+- En cas d'erreur CORS, vérifiez la configuration CORS dans `Backend/src/app.py`.
 
-function StatsComponent() {
-  const { urgences, couverture, loading, error } = useStats()
-  
-  // ...
-}
-```
-
-### Requêtes GraphQL disponibles
-
-Toutes les requêtes sont définies dans `src/lib/graphql.js` :
-
-- `GET_STATS_URGENCES` - Statistiques d'urgences
-- `GET_STATS_COUVERTURE` - Statistiques de couverture
-- `GET_URGENCES` - Liste des urgences (paginée)
-- `GET_COUVERTURES` - Liste des couvertures (paginée)
-- `GET_PHARMACIES` - Liste des pharmacies
-- `GET_URGENCES_BY_DEPARTMENT` - Urgences par département
-- `GET_COUVERTURES_BY_DEPARTMENT` - Couvertures par département
-
-## 🎯 Composants Shadcn/ui utilisés
-
-- **Button** - Boutons avec variantes (default, outline, ghost, etc.)
-- **Card** - Cartes avec header, content, footer
-- **Badge** - Badges pour tags et labels
-
-## 🔄 Prochaines étapes
-
-- [x] Connexion avec le backend
-- [ ] Tableau de bord avec visualisations (Chart.js / Recharts)
-- [ ] Page de prédictions avec graphiques interactifs
-- [ ] Page d'analyse géographique avec cartes
-- [ ] Intégration des données en temps réel
-- [ ] Ajout de plus de composants Shadcn (Dialog, Dropdown, etc.)
-
-## 📚 Ressources
-
-- [Tailwind CSS Documentation](https://tailwindcss.com/docs)
-- [Shadcn/ui Documentation](https://ui.shadcn.com/)
-- [Radix UI Documentation](https://www.radix-ui.com/)
-- [Lucide Icons](https://lucide.dev/)
-- [GraphQL Request Documentation](https://github.com/jasonkuhrt/graphql-request)
-
-## 🐛 Dépannage
-
-### Le backend ne répond pas
-
-1. Vérifiez que le backend est démarré : `cd Backend/src && python app.py`
-2. Vérifiez l'URL dans `.env` : `VITE_GRAPHQL_URL=http://localhost:5000/graphql`
-3. Vérifiez les CORS dans le backend (doit autoriser `http://localhost:3000`)
-
-### Erreurs CORS
-
-Si vous voyez des erreurs CORS, assurez-vous que :
-- Le backend autorise `http://localhost:3000` dans les CORS
-- Le backend est bien démarré sur le port 5000
-- L'URL dans `.env` est correcte
+Si vous voulez, j'ajoute ici des exemples de requêtes GraphQL à coller dans GraphiQL.
