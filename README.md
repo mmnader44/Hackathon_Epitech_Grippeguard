@@ -5,14 +5,6 @@
 [![React](https://img.shields.io/badge/React-19.2.0-61DAFB?logo=react)](https://react.dev/)
 [![Python](https://img.shields.io/badge/Python-3.x-3776AB?logo=python)](https://www.python.org/)
 [![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-4.0-38B2AC?logo=tailwind-css)](https://tailwindcss.com/)
-
-# 🦠 GrippeGuard - Optimisation de la stratégie vaccinale contre la grippe
-
-> Plateforme d'analyse et de prédiction pour optimiser la stratégie vaccinale contre la grippe en France
-
-[![React](https://img.shields.io/badge/React-19.2.0-61DAFB?logo=react)](https://react.dev/)
-[![Python](https://img.shields.io/badge/Python-3.x-3776AB?logo=python)](https://www.python.org/)
-[![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-4.0-38B2AC?logo=tailwind-css)](https://tailwindcss.com/)
 [![PostgreSQL](https://img.shields.io/badge/PostgreSQL-13+-336791?logo=postgresql)](https://www.postgresql.org/)
 
 ## 📋 Table des matières
@@ -210,11 +202,10 @@ Le projet utilise plusieurs sources de données publiques :
 
 Développé par l'équipe Epitech :
 
-- **Mehdi**
-- **Samy**
-- **Robin**
-- **Salah**
-- **Jaures**
+- **Mehdi**  Backend / ETL & ML
+- **Jaures** Backend / GraphQL
+- **Samy**   Frontend / Design & Viz
+- **Robin**  Designer/Chef de projet présentation
 
 ## 🎯 Objectifs du hackathon
 
@@ -225,16 +216,6 @@ Ce projet répond aux critères d'évaluation suivants :
 - ✅ **Impact potentiel** sur la santé publique
 - ✅ **Qualité** de la visualisation et présentation
 
-## 🔄 Prochaines étapes
-
-- [ ] Connexion Frontend ↔ Backend
-- [ ] Implémentation complète du pipeline ETL
-- [ ] Modèles de machine learning pour prédictions
-- [ ] API REST/GraphQL
-- [ ] Authentification utilisateurs
-- [ ] Export de rapports PDF
-- [ ] Notifications en temps réel
-- [ ] Application mobile (optionnel)
 
 ## 📝 Licence
 
