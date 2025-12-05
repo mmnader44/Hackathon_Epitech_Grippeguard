@@ -10,6 +10,12 @@ import geopandas as gpd
 from matplotlib.backends.backend_agg import FigureCanvasAgg as FigureCanvas
 from io import BytesIO
 import base64
+import ssl
+import urllib.request
+
+# Désactive la vérification des certificats SSL (non recommandé en production)
+ssl._create_default_https_context = ssl._create_unverified_context
+
  
 # === Fonctions utilitaires ===
 def create_image_from_matplotlib(fig):

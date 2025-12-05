@@ -1,5 +1,8 @@
 import pandas as pd
 import geopandas as gpd
+import ssl
+# Désactive la vérification des certificats (UNSAFE - uniquement pour tests locaux)
+ssl._create_default_https_context = ssl._create_unverified_context
 
 def read_csv_url(url):
 	"""

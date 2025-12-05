@@ -10,6 +10,7 @@ Le backend GraphQL pourra appeler `get_clean_dfs()` pour récupérer toutes les 
 from pathlib import Path
 from load import save_parquet, save_csv
 import yaml
+import os
 
 from extract import extract_all
 from transform import (
@@ -18,17 +19,26 @@ from transform import (
     prepare_urgences_for_frontend, prepare_couverture_for_frontend, prepare_pharmacies_for_frontend
 )
 
+# Chemin vers config.yaml (dans le répertoire parent de src/)
+_CONFIG_PATH = Path(__file__).parent.parent / 'config.yaml'
 
-def load_config(path='config.yaml'):
+def load_config(path=None):
     """
     Charge le fichier de configuration YAML.
     Il contient toutes les URLs des données.
     """
+    if path is None:
+        path = _CONFIG_PATH
+    else:
+        # Si un chemin relatif est fourni, le résoudre depuis le répertoire parent
+        if not os.path.isabs(path):
+            path = Path(__file__).parent.parent / path
+    
     with open(path) as f:
         return yaml.safe_load(f)
 
 
-def get_clean_dfs(config_path='config.yaml'):
+def get_clean_dfs(config_path=None):
     """
     Charge toutes les données brutes, les nettoie et renvoie un dictionnaire
     avec tous les DataFrames prêts à être utilisés par le GraphQL.
@@ -77,17 +87,17 @@ def get_clean_dfs(config_path='config.yaml'):
     }
 
 
-def get_urgences(config_path='config.yaml'):
+def get_urgences(config_path=None):
     """Retourne uniquement le DataFrame des urgences (avec geometrie pour la carte)."""
     return get_clean_dfs(config_path)['urgences']
 
 
-def get_couverture(config_path='config.yaml'):
+def get_couverture(config_path=None):
     """Retourne uniquement la couverture vaccinale (avec geometry)."""
     return get_clean_dfs(config_path)['couverture']
 
 
-def get_clean_df(name, config_path='config.yaml'):
+def get_clean_df(name, config_path=None):
     """
     Permet de récupérer un seul DataFrame nettoyé,
     par exemple : get_clean_df('urgences')

@@ -3,5 +3,15 @@ __pycache__/
 *.py[cod]
 
 # Ignorer les dossiers de données brutes et nettoyées
-backend/data/raw/
-backend/data/clean/
+backend/data/raw/*
+backend/data/clean/*
+Backend/data/processed/*
+
+# Permet de push les dossiers, même s'ils sont vides
+!backend/data/raw/
+!backend/data/clean/
+src/check_campagnes.py
+src/debug_data.py
+src/check_geometry.py
+
+Backend/.env
