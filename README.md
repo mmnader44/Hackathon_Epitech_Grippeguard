@@ -5,6 +5,14 @@
 [![React](https://img.shields.io/badge/React-19.2.0-61DAFB?logo=react)](https://react.dev/)
 [![Python](https://img.shields.io/badge/Python-3.x-3776AB?logo=python)](https://www.python.org/)
 [![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-4.0-38B2AC?logo=tailwind-css)](https://tailwindcss.com/)
+
+# 🦠 GrippeGuard - Optimisation de la stratégie vaccinale contre la grippe
+
+> Plateforme d'analyse et de prédiction pour optimiser la stratégie vaccinale contre la grippe en France
+
+[![React](https://img.shields.io/badge/React-19.2.0-61DAFB?logo=react)](https://react.dev/)
+[![Python](https://img.shields.io/badge/Python-3.x-3776AB?logo=python)](https://www.python.org/)
+[![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-4.0-38B2AC?logo=tailwind-css)](https://tailwindcss.com/)
 [![PostgreSQL](https://img.shields.io/badge/PostgreSQL-13+-336791?logo=postgresql)](https://www.postgresql.org/)
 
 ## 📋 Table des matières
@@ -19,127 +27,234 @@
 - [Structure du projet](#-structure-du-projet)
 - [Sources de données](#-sources-de-données)
 - [Équipe](#-équipe)
- # GrippeGuard — README
+- [Licence](#-licence)
 
-Plateforme créée dans le cadre d'un hackathon Epitech pour analyser et visualiser des données liées à la grippe en France (ETL, API GraphQL, frontend React, scripts ML).
+## 🎯 Description
 
-**But de ce README** : décrire l'architecture réelle du dépôt, expliquer comment lancer les composants et où se trouvent les scripts importants.
+GrippeGuard est une plateforme innovante développée dans le cadre d'un hackathon Epitech visant à optimiser la stratégie vaccinale contre la grippe en France. Le projet exploite les données publiques ouvertes pour :
 
-**Organisation principale du dépôt**
+- **Prédire les besoins en vaccins** en analysant les tendances historiques
+- **Optimiser la distribution** des vaccins en pharmacie
+- **Anticiper les passages aux urgences** et les actes SOS Médecins
+- **Améliorer l'accès aux soins** en identifiant les zones sous-vaccinées
 
-- `Backend/` : pipeline ETL, API (Flask + GraphQL), scripts ML et utilitaires Python.
-- `Frontend/` : application React (Vite) pour visualiser les données et interagir avec l'API GraphQL.
-- `Legacy/` : prototype/démonstrateur (Dash + notebooks) conservé pour référence.
+## 🎯 Problématique
 
-**Résumé rapide — commandes utiles**
+Les épidémies de grippe représentent un défi majeur pour le système de santé, nécessitant une planification rigoureuse des campagnes de vaccination et une gestion optimale des ressources médicales. GrippeGuard répond à ce défi en fournissant :
 
-- Installer les dépendances Python (backend) :
+- Des modèles prédictifs pour estimer les besoins en vaccins
+- Des outils de visualisation pour aider les décideurs
+- Des solutions pour améliorer la distribution et l'accès aux soins
 
-```powershell
-cd Backend
-python -m pip install -r requirements.txt
+## ✨ Fonctionnalités
+
+### 🔮 Prédictions
+- Analyse des tendances historiques de couverture vaccinale
+- Utilisation des Indicateurs Avancés Sanitaires (IAS®)
+- Modèles prédictifs pour les besoins en vaccins
+
+### 📊 Visualisations
+- Cartes choroplèthiques interactives par département
+- Graphiques d'évolution temporelle
+- Analyses par classe d'âge et région
+- Tableaux de bord dynamiques
+
+### 🗺️ Optimisation géographique
+- Identification des zones sous-vaccinées
+- Analyse de la distribution des pharmacies
+- Cartographie des besoins par région
+
+### 🏥 Anticipation des urgences
+- Prédiction des passages aux urgences
+- Prévision des actes SOS Médecins
+- Analyse des taux d'hospitalisation
+
+## 🏗️ Architecture
+
+Le projet est organisé en plusieurs composants, adaptés à l'état actuel du dépôt :
+
+```
+GrippeGuard/
+├── Backend/
+│   ├── config.yaml          # Configuration du pipeline (URLs, chemins de sortie)
+│   ├── requirements.txt     # Dépendances Python
+│   ├── data/
+│   │   ├── raw/             # données brutes téléchargées
+│   │   └── clean/           # sorties nettoyées (.parquet / .csv)
+│   ├── ml/                  # scripts ML (preprocess/model/predict/run_real_test)
+│   └── src/
+│       ├── app.py           # serveur Flask + endpoint /graphql
+│       ├── main.py          # orchestrateur ETL (extract -> transform -> load)
+│       ├── extract.py
+│       ├── transform.py
+│       ├── load.py
+│       └── schema.py        # schéma GraphQL
+│
+├── Frontend/
+│   ├── package.json
+│   ├── vite.config.js
+│   ├── public/
+│   └── src/                 # React (components/, pages/, lib/, hooks/)
+│
+└── Legacy/
+    ├── app.py               # prototype Dash
+    ├── requirements.txt
+    └── GoogleCollab_Explo/  # notebooks d'exploration
 ```
 
-- Lancer le pipeline ETL et générer les fichiers propres :
+### Pipeline de données
 
-```powershell
-cd Backend
-python src/main.py
-```
+1. **Extract** : scripts dans `Backend/src/extract.py` téléchargent et chargent les jeux de données brutes dans `Backend/data/raw/`.
+2. **Transform** : `Backend/src/transform.py` nettoie, fusionne et prépare les GeoDataFrames.
+3. **Load** : `Backend/src/load.py` exporte les sorties dans `Backend/data/clean/` (parquet/csv) ou les prépare pour l'API.
 
-- Lancer l'API GraphQL (serveur Flask) :
+Le serveur GraphQL (Flask) expose `/graphql` via `Backend/src/app.py` et s'appuie sur `Backend/src/schema.py`.
 
-```powershell
-cd Backend
-python src/app.py
-```
+## 🛠️ Technologies
 
-    Le serveur GraphQL écoute par défaut sur le port `5001` (variable `GRAPHQL_PORT`) et expose l'endpoint `/graphql`.
+### Frontend
+- **React 19** - Bibliothèque UI moderne
+- **Vite** - Build tool ultra-rapide
+- **Tailwind CSS 4** - Framework CSS utility-first
+- **Shadcn/ui** - Composants UI accessibles
+- **Radix UI** - Primitives accessibles
+- **Lucide React** - Icônes modernes
 
-- Lancer le frontend (développement) :
+### Backend
+- **Python 3.x** - Langage principal
+- **Flask** - Serveur léger pour l'API GraphQL
+- **Graphene / graphql-core** - Schéma GraphQL
+- **GeoPandas / pandas / pyarrow** - Traitement et stockage des données
+- **PyYAML** - Lecture de `config.yaml`
 
-```powershell
+### Infrastructure
+- **(Optionnel)** Docker / Docker Compose pour conteneurisation
+
+## 📦 Installation
+
+### Prérequis
+
+- Node.js 18+ et npm
+- Python 3.9+
+- (Optionnel) Docker et Docker Compose
+- Git
+
+### Installation du Frontend
+
+```bash
 cd Frontend
 npm install
 npm run dev
 ```
 
-    Par défaut Vite démarre sur `http://localhost:5173` ou `http://localhost:3000` selon votre configuration. Le frontend attend l'API GraphQL sur l'URL configurée dans `.env` (voir `Frontend/README.md`).
+L'application sera accessible sur `http://localhost:3000` (ou `http://localhost:5173` suivant Vite).
 
-**Détails importants sur le fonctionnement**
+### Installation du Backend
 
-- ETL (Backend/src/main.py) :
-    - `main.py` orchestre `extract.py`, `transform.py` et `load.py`.
-    - `config.yaml` (à la racine de `Backend/`) contient les URLs et chemins de sortie.
-    - Exécution génère des fichiers nettoyés dans le répertoire `data/clean` (ou celui configuré dans `config.yaml`).
-
-- API (Backend/src/app.py) :
-    - Serveur Flask exposant un endpoint `/graphql` utilisant le schéma défini dans `Backend/src/schema.py`.
-    - CORS configuré pour autoriser l'accès depuis le frontend local.
-    - Le frontend utilise typiquement `http://localhost:5001/graphql` comme endpoint GraphQL.
-
-- ML (Backend/ml/) :
-    - `preprocess.py`, `model.py`, `predict.py` et `run_real_test.py` contiennent les étapes de prétraitement, entraînement et prédiction.
-    - Les modèles et résultats peuvent être exportés/chargés via `joblib`/`pickle` selon les scripts.
-
-**Structure concise des dossiers**
-
-```
-.
-├── Backend/
-│   ├── config.yaml
-│   ├── requirements.txt
-│   ├── data/
-│   │   ├── raw/
-│   │   └── clean/
-│   ├── ml/
-│   │   ├── model.py
-│   │   ├── predict.py
-│   │   └── preprocess.py
-│   └── src/
-│       ├── app.py        # API Flask + /graphql
-│       ├── main.py       # Orchestrateur ETL
-│       ├── extract.py
-│       ├── transform.py
-│       ├── load.py
-│       └── schema.py
-├── Frontend/
-│   ├── package.json
-│   └── src/ (React + components)
-└── Legacy/
-        └── app.py (prototype Dash + notebooks)
+```bash
+cd Backend
+python -m pip install -r requirements.txt
 ```
 
-**Conseils pour le développement local**
+## 🚀 Utilisation
 
-- S'assurer que le backend est lancé (voir `python src/app.py`) avant de démarrer le frontend.
-- Configurer l'URL GraphQL dans `Frontend/.env` (variable `VITE_GRAPHQL_URL`). Exemple :
+### Développement Frontend
 
-```env
-VITE_GRAPHQL_URL=http://localhost:5001/graphql
+```bash
+cd Frontend
+npm run dev      # Serveur de développement
+npm run build    # Build de production
+npm run preview  # Prévisualisation du build
 ```
 
-- Pour régénérer les données propres après modification de la configuration ou des scripts d'extraction :
+### Exécution du pipeline ETL
 
-```powershell
+```bash
 cd Backend
 python src/main.py
 ```
 
-**Tests**
+### Lancer l'API GraphQL
 
-- Il existe un test smoke basique dans `tests/test_smoke.py` à la racine. Pour l'exécuter :
-
-```powershell
-python -m pytest -q
+```bash
+cd Backend
+python src/app.py
 ```
 
-**Questions / modifications**
+Le endpoint GraphQL est disponible sur `/graphql` (par défaut le serveur écoute sur le port configuré dans `GRAPHQL_PORT` / `.env`).
 
-Si vous voulez que j'ajoute des sections détaillées (par ex. commandes Docker, description des endpoints GraphQL, exemples de requêtes) dites-le et je complète les README.
+### Configuration
+
+Le fichier `Backend/config.yaml` contient toutes les configurations :
+- URLs des sources de données
+- Paramètres de sortie (`output.clean_dir`)
+
+## 📊 Sources de données
+
+Le projet utilise plusieurs sources de données publiques :
+
+### Santé Publique France
+- **Passages aux urgences** : [Données départementales](https://odisse.santepubliquefrance.fr/explore/dataset/grippe-passages-aux-urgences-et-actes-sos-medecins-departement/)
+- **Couverture vaccinale** : [Données départementales](https://odisse.santepubliquefrance.fr/explore/dataset/couvertures-vaccinales-des-adolescent-et-adultes-departement/)
+- **Données régionales et nationales** : Disponibles via l'API Odisse
+
+### IQVIA
+- **Distribution de vaccins** : [Datasets IQVIA](https://www.data.gouv.fr/organizations/iqvia-france/datasets)
+- **Actes de vaccination en pharmacie**
+
+### Data.gouv.fr
+- **Indicateur Avancé Sanitaire (IAS®)** : [Dataset IAS](https://www.data.gouv.fr/datasets/indicateur-avance-sanitaire-ias-r-vaccination-grippe/)
+- **Données géographiques** : GeoJSON des départements français
+
+## 👥 Équipe
+
+Développé par l'équipe Epitech :
+
+- **Mehdi**
+- **Samy**
+- **Robin**
+- **Salah**
+- **Jaures**
+
+## 🎯 Objectifs du hackathon
+
+Ce projet répond aux critères d'évaluation suivants :
+
+- ✅ **Pertinence** des solutions proposées
+- ✅ **Innovation** et originalité des approches
+- ✅ **Impact potentiel** sur la santé publique
+- ✅ **Qualité** de la visualisation et présentation
+
+## 🔄 Prochaines étapes
+
+- [ ] Connexion Frontend ↔ Backend
+- [ ] Implémentation complète du pipeline ETL
+- [ ] Modèles de machine learning pour prédictions
+- [ ] API REST/GraphQL
+- [ ] Authentification utilisateurs
+- [ ] Export de rapports PDF
+- [ ] Notifications en temps réel
+- [ ] Application mobile (optionnel)
+
+## 📝 Licence
+
+Ce projet est développé dans le cadre d'un hackathon Epitech. Voir le fichier `LICENSE` pour plus d'informations.
+
+## 🤝 Contribution
+
+Les contributions sont les bienvenues ! Pour contribuer :
+
+1. Forkez le repository
+2. Créez une branche (`git checkout -b feature/AmazingFeature`)
+3. Committez vos changements (`git commit -m 'Add some AmazingFeature'`)
+4. Pushez vers la branche (`git push origin feature/AmazingFeature`)
+5. Ouvrez une Pull Request
+
+## 📞 Contact
+
+Pour toute question ou suggestion, n'hésitez pas à ouvrir une issue sur le repository.
 
 ---
 
-Fin du README racine.
-```
+**Développé avec ❤️ pour améliorer la santé publique**
 
